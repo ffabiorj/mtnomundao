@@ -1,10 +1,55 @@
 
-
+body {
+    font-family: 'Fjalla One', sans-serif;
+}
 
 .bg-dark {
     background-color: #eb783b!important;
 }
 
-.img-fluid {
-    height: 600px;
+.top {
+    margin-top: 80px;
 }
+
+.top-contact {
+    margin-top: 200px;
+}
+
+.fot {
+    margin-top: 200px;
+}
+
+.font {
+    font-size: 14px;
+}
+
+.members {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.carroucel {
+    margin: auto;
+    max-width: 800px;
+
+}
+
+.construction {
+    font-size: 40px;
+}
+
+.btn:focus, .btn:active, button:focus, button:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  #image-gallery .modal-footer{
+    display: block;
+  }
+  
+  .thumb{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  

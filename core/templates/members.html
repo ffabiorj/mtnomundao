@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block container %}
+  
+
+<div class="container top">
+<h1 class="my-4 text-center">Cdds</h1>
+<div class="row">
+<div class="col-sm-6 text-center mb-4">
+  <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="http://placehold.it/200x200" alt="">
+  <span>Nome</span>
+  <h5>John Smith</h5>
+  <span>Idade:</span>
+  <span>30 anos</span> -
+  <span>Cidade:</span>
+  <span>Rio de Janeiro</span>
+  </div>
+  <div class="col-sm-6 text-center mb-4">
+    <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="http://placehold.it/200x200" alt="">
+      <span>Nome</span>
+      <h5>John Smith</h5>
+      <span>Idade:</span><br>
+      <span>30 anos</span> -
+      <span>Cidade:</span><br>
+      <span>Rio de Janeiro</span>
+  </div>
+</div>
+
+<h1 class="text-center members">Nossos Membros</h1>
+
+      <!-- Team Members Row -->
+      <div class="row">
+      {% for person in object_list %}
+    <div class="col-lg-4 col-sm-6 text-center mb-4 mb-2">
+          <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="media/{{ person.photos }}" alt="person_photo" height="200" width="200">
+        <span>Nome</span>
+          <div class="font">
+          <h5>{{ person.name }}</h5>
+          <span>Idade:</span>
+          <span>{{ person.age }}</span> -
+          <span>Cidade:</span>
+          <span>{{ person.city}}</span>
+          <br>
+        <span>O que você mas gosta no conecades:</span><br>
+        <p>{{ person.about }}</p>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+
+    {% endblock container %}
