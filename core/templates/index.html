@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block container %}
 
 
 <div class="col-sm-12 col-lg-12 text-center">
   <h1 class="display-4 mt-4">Seja bem vindo</h1>
-  <img src="../static/img/logo1.png" alt="logo-mt-no-mundo" class="img-fluid">
+  <img src="{% static "img/logo1.png" %}" alt="logo-mt-no-mundo" class="img-fluid">
 </div>
 
 <div class="row">

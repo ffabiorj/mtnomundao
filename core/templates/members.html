@@ -8,12 +8,13 @@
 <div class="row">
    
   {% for person in person_list %}
-  {% if person.is_staff and is not person.is_superuser %}
+  {% if person.is_staff and if is not person.user.is_superuser  %}
+  
   <div class="col-sm-6 text-center mb-4" id="main">
     {% thumbnail person.photo "200x200" crop="center" as im %}
       <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="person_photo" >
       {% empty %}
-      <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+      <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/thumbnail.png" %}" alt="thumbnail_photo">
       {% endthumbnail %}
       <span>Nome</span>
       <div class="font">
@@ -34,12 +35,14 @@
         {{ person.qnt }}
         {% else %}
       0{% endif %}</span>
+
       <br>
       <span>O que você mas gosta no conecades:</span><br>
       <p>{% if profile.about %}{{ profile.about }}{% else %} Nenhuma informação.{% endif %}</p>
         </div>
       </div> 
       {% endif %}
+      
       {% endfor %}
       
     </div>
