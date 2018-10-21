@@ -1,52 +1,87 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% load thumbnail %}
 {% block container %}
   
 
-<div class="container top">
-<h1 class="my-4 text-center">Cdds</h1>
+<h1 class="my-4 text-center">CDDs</h1>
 <div class="row">
-<div class="col-sm-6 text-center mb-4">
-  <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="http://placehold.it/200x200" alt="">
-  <span>Nome</span>
-  <h5>John Smith</h5>
-  <span>Idade:</span>
-  <span>30 anos</span> -
-  <span>Cidade:</span>
-  <span>Rio de Janeiro</span>
-  </div>
-  <div class="col-sm-6 text-center mb-4">
-    <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="http://placehold.it/200x200" alt="">
+   
+  {% for person in person_list %}
+  {% if person.is_staff and is not person.is_superuser %}
+  <div class="col-sm-6 text-center mb-4" id="main">
+    {% thumbnail person.photo "200x200" crop="center" as im %}
+      <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="person_photo" >
+      {% empty %}
+      <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+      {% endthumbnail %}
       <span>Nome</span>
-      <h5>John Smith</h5>
-      <span>Idade:</span><br>
-      <span>30 anos</span> -
-      <span>Cidade:</span><br>
-      <span>Rio de Janeiro</span>
-  </div>
-</div>
+      <div class="font">
+      <h5>{{ person.name }}</h5>
+        <span>Idade:</span>
+        <span>{% if person.age %}
+        {{ person.age }}
+        {% else %}
+        Não informada.{% endif %}</span> -
+      <span>Cidade:</span>
+      <span>{% if person.city %}
+      {{ person.city }}
+      {% else %}
+      Não informada.{% endif %}</span>
+      <br>
+      <span>Quantas vezes você foi no Conecades: </span>
+      <span>{% if person.qnt %}
+        {{ person.qnt }}
+        {% else %}
+      0{% endif %}</span>
+      <br>
+      <span>O que você mas gosta no conecades:</span><br>
+      <p>{% if profile.about %}{{ profile.about }}{% else %} Nenhuma informação.{% endif %}</p>
+        </div>
+      </div> 
+      {% endif %}
+      {% endfor %}
+      
+    </div>
 
 <h1 class="text-center members">Nossos Membros</h1>
 
       <!-- Team Members Row -->
       <div class="row">
-      {% for person in object_list %}
+      {% for person in person_list %}
+      
     <div class="col-lg-4 col-sm-6 text-center mb-4 mb-2">
-          <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="media/{{ person.photos }}" alt="person_photo" height="200" width="200">
-        <span>Nome</span>
+        {% thumbnail person.photo "200x200" crop="center" as im %}
+          <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="person_photo" >
+          {% empty %}
+          <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+          {% endthumbnail %}
+          <span>Nome</span>
           <div class="font">
           <h5>{{ person.name }}</h5>
           <span>Idade:</span>
-          <span>{{ person.age }}</span> -
+          <span>{% if person.age %}
+          {{ person.age }}
+          {% else %}
+         Não informada.{% endif %}</span> -
           <span>Cidade:</span>
-          <span>{{ person.city}}</span>
+          <span>{% if person.city %}
+          {{ person.city }}
+          {% else %}
+          Não informada.{% endif %}</span>
+          <br>
+          <span>Quantas vezes você foi no Conecades: </span>
+          <span>{% if person.qnt %}
+            {{ person.qnt }}
+            {% else %}
+          0{% endif %}</span>
           <br>
         <span>O que você mas gosta no conecades:</span><br>
-        <p>{{ person.about }}</p>
+        <p>{% if profile.about %}{{ profile.about }}{% else %} Nenhuma informação.{% endif %}</p>
       </div>
     </div>
     {% endfor %}
     </div>
-  </div>
+
 
     {% endblock container %}

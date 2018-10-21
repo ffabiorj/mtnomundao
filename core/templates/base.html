@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -12,58 +13,91 @@
     <title>MT no Mundão</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/style.css" rel="stylesheet">
-    <link href="../static/css/balloon.css" rel="stylesheet">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
 
   </head>
 
   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+          <a class="navbar-brand" href="{% url 'home' %}">MT no Mundão</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'members' %}">Team MT</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'photos' %}">Fotos</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'transport' %}">Transporte</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contact' %}">Contato</a>
+              </li>
+              {% if user.is_authenticated and user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_photos' %}">Adicionar Foto</a>
+              </li>
+              {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right link">
+                {% if user.is_authenticated %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{ user }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li class="dropdown-item">Perfil</li>
+                      <div class="dropdown-divider"></div>  
+                      <li><a class="dropdown-item" href="{% url 'update_user' %}">Alterar dados</a></li>  
+                      <li><a class="dropdown-item" href="{% url 'update_password' %}">Alterar Senha</a></li>  
+                    </ul>
+                  </li>
+                <li class="px-2"><a href="{% url 'logout' %}">Sair</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Entrar</a></li>
+                <li class="px-2"><a href="{% url 'register' %}">Cadastro</a></li>
+                {% endif %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+              <input class="form-control mr-sm-2" type="search" name="search" placeholder="Pesquise um membro" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            </form>
+          </div>
+        </nav>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">MT no Mundão</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'members' %}">Team MT</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'photos' %}">Fotos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'transport' %}">Transporte</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact' %}">Contato</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    
 
     <!-- Page Content -->
+    
+    <div class="container top">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} text-center">
+            {{ message }}
+          </div>
+          {% endfor %}
+        {% endif %}
     {% block container %}
-       
-     {% endblock container %}
-    <footer class="page-footer font-small mt-5">
-      <div class="footer-copyright text-center py-3">Desenvolvido por: Fábio Oliveira</div>
+    {% endblock container %}
+    
+    <footer class="page-footer font-small" id="rodape contact">
+      <div class="footer-copyright text-center py-3 ">Desenvolvido por: Fábio Oliveira</div>
     </footer>
-
+  </div>
     <!-- Bootstrap core JavaScript -->
-    <script src="../static/jquery/jquery.min.js"></script>
-    <script src="../static/js/script.js"></script>
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static "jquery/jquery.min.js" %}"></script>
+    <script src="{% static "js/script.js" %}"></script>
+    <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
 
   </body>
 

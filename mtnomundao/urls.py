@@ -17,13 +17,20 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import LoginView, LogoutView
 from core import views
+
 
 
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='home'),
     path('membros/', views.MembersListView.as_view(), name='members'),
+    path('entrar/', LoginView.as_view(template_name='login.html'), name='login' ),
+    path('sair/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('pesquisa/', views.SearchView.as_view(), name='search'),
+    path('perfil/<int:pk>/', views.ProfileView.as_view(), name='profile'),
     path('fotos/', views.PhotosView.as_view(), name='photos'),
+    path('adicionar-fotos/', views.AddPhotoView.as_view(), name='add_photos'),
     path('transporte/', views.TransportView.as_view(), name='transport'),
     path('contato/', views.ContactView.as_view(), name='contact'),
     path('conta/', include('accounts.urls')),

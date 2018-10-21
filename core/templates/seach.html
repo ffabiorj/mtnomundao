@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block container %}
+  <h1 class="text-center" id="search">Resultado da busca:</h1>
+  {% if searches %}
+  <div class="row">
+  {% for search in searches %}
+  <div class="col-lg-4 col-sm-6 text-center mb-4 mb-2" >
+    <a href="{% url 'profile' search.id %}">
+      {% thumbnail search.photo "200x200" crop="center" as im %}
+      <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="person_photo" >
+      {% empty %}
+      <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+      {% endthumbnail %}
+    </a>
+      <span>Nome</span>
+      <div class="font">
+          <h5>{{ search.name }}</h5>
+        </div>
+    </div>
+
+    {% endfor %}
+  </div>
+    {% else %}
+    <div class="alert alert-warning text-center"><p>Nenhum resultado encontrado!</p></div>  
+  {% endif %}
+{% endblock container %}

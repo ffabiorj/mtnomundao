@@ -1,5 +1,6 @@
 import re
 from django.db import models
+from sorl.thumbnail import ImageField
 from django.core import validators
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 
@@ -17,10 +18,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma'
     )
     name = models.CharField('Nome', max_length=100, blank=False)
-    age = models.IntegerField('Idade', blank=True)
+    age = models.IntegerField('Idade', blank=True, null=True)
+    qnt = models.IntegerField('Quanto(a)s vezes você foi no Conecades:', blank=True, null=True)
     city = models.CharField('Cidade', max_length=50, blank=True)
     email = models.EmailField('E-mail', unique=True)
-    about = models.TextField('Informação', blank=True)
+    about = models.TextField('Do que você mas gosta no conecades', blank=True)
     photo = models.ImageField('Foto', upload_to='fotos', blank=True, null=True)
     is_staff = models.BooleanField('Ativo', default=False)
     is_active = models.BooleanField('Ativo', default=True)
@@ -43,3 +45,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return str(self).split(" ")[0]
+

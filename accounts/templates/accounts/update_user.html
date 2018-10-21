@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+
+{% block container %}
+<div class="row" id="update-user">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for error in form.non_field_errors  %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
+    <fieldset>
+    {% for field in form %}
+    <div class="form-group {% if field.erros %} has-error{% endif %} ">
+        <label class="col-md-8   control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+        <div class="col-md-10">
+            {% render_field field class="form-control" %}
+            {% for error in field.errors %}
+                <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-md-8 col-md-offset-4">
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </div>
+    </div>
+</fieldset>    
+</form>
+</div>
+{% endblock container %}
+

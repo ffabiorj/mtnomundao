@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/fabio/.local/share/virtualenvs/mtnomundao-eFqP8cb2/bin/python"
+    "python.pythonPath": "/usr/local/bin/python3",
+    "workbench.colorTheme": "Dark++ Italic"
 }

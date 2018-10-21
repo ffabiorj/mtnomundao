@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+
+{% block container %}
+<h1 class="text-center">PERFIL</h1>
+<div class="row">
+   
+      <div class="col-sm-12 text-center mb-4">
+            {% thumbnail profile.photo "200x200" crop="center" as im %}
+              <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="profile_photo" >
+              {% empty %}
+              <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+              {% endthumbnail %}
+              <span>Nome</span>
+            <div class="font">
+            <h5>{{ person.name }}</h5>
+            <span>Idade:</span>
+            <span>{% if person.age %}
+            {{ person.age }}
+            {% else %}
+           Não informada.{% endif %}</span> -
+            <span>Cidade:</span>
+            <span>{% if person.city %}
+            {{ person.city }}
+            {% else %}
+            Não informada.{% endif %}</span>
+            <br>
+            <span>Quantas vezes você foi no Conecades: </span>
+            <span>{% if person.qnt %}
+              {{ person.qnt }}
+              {% else %}
+            0{% endif %}</span>
+            <br>
+          <span>O que você mas gosta no conecades:</span><br>
+          <p>{% if profile.about %}{{ profile.about }}{% else %} Nenhuma informação.{% endif %}</p>
+          </div>
+        </div> 
+      </div>
+{% endblock container %}

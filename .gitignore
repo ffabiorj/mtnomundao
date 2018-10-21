@@ -109,5 +109,8 @@ venv.bak/
 .dmypy.json
 dmypy.json
 .DS_Store
-.idea
-.vscode
+*.idea
+*.vscode
+
+media
+.env
