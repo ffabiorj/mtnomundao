@@ -59,7 +59,7 @@
         {% thumbnail person.photo "200x200" crop="center" as im %}
           <img  class="rounded-circle img-fluid d-block mx-auto mb-2" src="{{ im.url }}" width="{{ im.x }}" height="{{ im.y }}"  alt="person_photo" >
           {% empty %}
-          <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/photo.png" %}" alt="">
+          <img class="rounded-circle img-fluid d-block mx-auto mb-2" src="{% static "img/thumbnail.png" %}" alt="">
           {% endthumbnail %}
           <span>Nome</span>
           <div class="font">
