@@ -173,8 +173,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-
-
 # settings e-mail
 
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
