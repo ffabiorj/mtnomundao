@@ -3,7 +3,7 @@ boto3==1.9.28
 botocore==1.12.28
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==2.1.2
+Django==2.1.11
 django-multiselectfield==0.1.8
 django-storages==1.7.1
 django-widget-tweaks==1.4.3
